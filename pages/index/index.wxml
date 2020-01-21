@@ -1,13 +1,25 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class='contentWarp' style="background: url({{BackgrounndSrc}}) no-repeat" bindtouchstart="start" bindtouchmove="move" bindtouchend="end">
+  <!-- 多照片处理 -->
+  <!-- <block wx:for="{{itemList}}" wx:key="{{item.id}}"> -->
+    <!-- 总体架构 -->
+    <view class='touchWrap' style='transform: scale({{itemList[0].scale}});top:{{itemList[0].top}}px;left:{{itemList[0].left}}px; '>
+      <!-- 图形外轮廓 -->
+      <view class='imgWrap {{itemList[0].active? "touchActive":""}}' style="transform: rotate({{itemList[0].angle}}deg); border: {{itemList[0].active?4*item.oScale:0}}rpx #fff dashed;" bindtouchend="rigis">
+
+      <!-- <view style="position:fixed;top:9999rpx;"> -->
+          <canvas data-id='{{itemList[0].id}}' canvas-id="canvasBackground" style='width:{{itemList[0].imgwidth}}px;height:{{itemList[0].imgheight}}px;position:fixed;top:800px;' ></canvas>
+      <!-- </view> -->
+
+        <image src='{{imgSrc}}' data-id='{{itemList[0].id}}' style='width:{{itemList[0].width}}px;height:{{itemList[0].height}}px;opacity:0.4;' bindtouchstart='WraptouchStart'  bindtouchmove='WraptouchMove' bindtouchend='WraptouchEnd'></image>
+
+        <image class='o' src='../../img/o.png' style='transform: scale({{itemList[0].oScale}});transform-origin:center;' data-id='{{itemList[0].id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend='WraptouchEnd'></image>
+
+        <view hidden="{{hidden}}">Coordinates: ({{x}}, {{y}})</view>
+
+      </view>
+    </view>
+  <!-- </block> -->
 </view>
+
+<button bindtap="save" style="float:left;margin-top:600px;">生成</button>
+<image src="{{src}}" style="width:100%; height:{{height}}px;"></image>
