@@ -1,14 +1,13 @@
-<view class='contentWarp' style="background: url({{BackgrounndSrc}}) no-repeat" bindtouchstart="start" bindtouchmove="move" bindtouchend="end">
+<view class='contentWarp' style="background: url({{BackgrounndSrc}}) no-repeat;" bindtouchstart="start" bindtouchmove="move" bindtouchend="end">
   <!-- 多照片处理 -->
   <!-- <block wx:for="{{itemList}}" wx:key="{{item.id}}"> -->
     <!-- 总体架构 -->
     <view class='touchWrap' style='transform: scale({{itemList[0].scale}});top:{{itemList[0].top}}px;left:{{itemList[0].left}}px; '>
       <!-- 图形外轮廓 -->
+      
       <view class='imgWrap {{itemList[0].active? "touchActive":""}}' style="transform: rotate({{itemList[0].angle}}deg); border: {{itemList[0].active?4*item.oScale:0}}rpx #fff dashed;" bindtouchend="rigis">
 
-      <!-- <view style="position:fixed;top:9999rpx;"> -->
-          <canvas data-id='{{itemList[0].id}}' canvas-id="canvasBackground" style='width:{{itemList[0].imgwidth}}px;height:{{itemList[0].imgheight}}px;position:fixed;top:800px;' ></canvas>
-      <!-- </view> -->
+        <canvas data-id='{{itemList[0].id}}' canvas-id="canvasBackground" style='width:{{itemList[0].imgwidth}}px;height:{{itemList[0].imgheight}}px;position:fixed;top:500px;' ></canvas>
 
         <image src='{{imgSrc}}' data-id='{{itemList[0].id}}' style='width:{{itemList[0].width}}px;height:{{itemList[0].height}}px;opacity:0.4;' bindtouchstart='WraptouchStart'  bindtouchmove='WraptouchMove' bindtouchend='WraptouchEnd'></image>
 

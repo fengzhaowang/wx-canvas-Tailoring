@@ -3,7 +3,7 @@ Page({
   data: {
     itemList:[],
     imgSrc:'https://xiamaliu.xyz/fei/clothes3.png',
-
+    indexs: 0,
     x: 0,
     y: 0,
     hidden: true
@@ -107,30 +107,31 @@ Page({
           itemList: items
         })
         // ctxBackground.drawImage(res.path, 0, 0, wx.getSystemInfoSync().windowWidth, res.height > 500 ? 500 : res.height);
-        ctxBackground.drawImage(res.path, imgData.drawImageX * -1 + 7, imgData.drawImageY * -1, res.width, res.height);
+        ctxBackground.drawImage(res.path, imgData.drawImageX, imgData.drawImageY, res.width, res.height);
         ctxBackground.restore();
         ctxBackground.draw();
       }
     })
-  },
+  }, 
   WraptouchEnd: function (e) {
     var that = this;
+    that.data.indexs += 1;
     that.data.itemList = [];
-    var drawImageXAfter = e.changedTouches[0].clientX - that.data.drawImageXBefor;
-    var drawImageYAfter = e.changedTouches[0].clientY - that.data.drawImageYBefor;
+    var drawImageXAfter = (e.changedTouches[0].clientX - that.data.drawImageXBefor) * -1;
+    var drawImageYAfter = (e.changedTouches[0].clientY - that.data.drawImageYBefor) * -1;
+    console.log(drawImageXAfter);
+    console.log(drawImageYAfter);
     that.setDropItem({
       url: 'https://xiamaliu.xyz/fei/clothes.jpg',
       drawImageX: drawImageXAfter,
       drawImageY: drawImageYAfter
     });
-    console.log(that.data.itemList)
   },
   save: function () {
     var that = this
     wx.canvasToTempFilePath({
       canvasId: 'canvasBackground',
       success(res) {
-        // console.log(res)
         that.setData({
           src: res.tempFilePath
         })
